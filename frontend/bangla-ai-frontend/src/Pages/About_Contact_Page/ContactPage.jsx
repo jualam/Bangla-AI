@@ -1,6 +1,6 @@
 import React from 'react'
 
-const contact = () => {
+const ContactPage = () => {
   return (
     <div>
         <h1 className="text-2xl">This is Contact Page</h1>
