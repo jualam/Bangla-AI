@@ -48,8 +48,8 @@ const LandingPage = () => {
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
             Welcome to <span className="text-green-500">Bangla-AI</span>
           </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto md:mx-0">
-            বাংলা এআই : সংবাদ অনুবাদে প্রযুক্তির নতুন যুগ
+          <p className="mt-4 text-lg font-bold text-gray-600 max-w-lg mx-auto md:mx-0">
+            বাংলা এ আই, বাংলায় এ আই, আমাদের এ আই
           </p>
         </div>
 
@@ -78,9 +78,11 @@ const LandingPage = () => {
             </label>
 
             {/* Translate Button */}
-            <button className="w-full md:w-auto px-6 py-3 text-base font-medium bg-black hover:bg-gray-800 transition rounded-lg text-white hover:shadow-lg">
-              Translate →
-            </button>
+            <Link to="/get-started">
+              <button className="w-full md:w-auto px-6 py-3 text-base font-medium bg-black hover:bg-gray-800 transition rounded-lg text-white hover:shadow-lg">
+                Translate →
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -183,9 +185,11 @@ const LandingPage = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="mt-6 text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed"
         >
-          Bangla AI is an advanced AI-powered platform built to support Bengali ethnic media journalists in New York City. 
-          Our mission is to provide state-of-the-art tools that improve translation accuracy and streamline content creation, 
-          enabling journalists to deliver timely, high-quality news to the Bengali-speaking community.
+          Bangla AI is an advanced AI-powered platform built to support Bengali
+          ethnic media journalists in New York City. Our mission is to provide
+          state-of-the-art tools that improve translation accuracy and
+          streamline content creation, enabling journalists to deliver timely,
+          high-quality news to the Bengali-speaking community.
         </motion.p>
 
         {/* Bengali Version */}
@@ -203,9 +207,12 @@ const LandingPage = () => {
           transition={{ duration: 1, delay: 0.9 }}
           className="mt-6 text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed"
         >
-          বাংলা এআই হল একটি উন্নত এআই-চালিত প্ল্যাটফর্ম যা নিউ ইয়র্ক সিটির বাংলা জাতিগত মিডিয়া সাংবাদিকদের সহায়তা করার জন্য তৈরি হয়েছে। 
-          আমাদের লক্ষ্য হলো অত্যাধুনিক সরঞ্জাম সরবরাহ করা যা অনুবাদের নির্ভুলতা বৃদ্ধি করে এবং কন্টেন্ট তৈরি করার প্রক্রিয়াকে সহজতর করে, 
-          যাতে সাংবাদিকরা বাংলা ভাষাভাষী সম্প্রদায়ের জন্য সময়মতো এবং উচ্চ-মানের সংবাদ প্রদান করতে পারেন।
+          বাংলা এআই হল একটি উন্নত এআই-চালিত প্ল্যাটফর্ম যা নিউ ইয়র্ক সিটির
+          বাংলা জাতিগত মিডিয়া সাংবাদিকদের সহায়তা করার জন্য তৈরি হয়েছে। আমাদের
+          লক্ষ্য হলো অত্যাধুনিক সরঞ্জাম সরবরাহ করা যা অনুবাদের নির্ভুলতা বৃদ্ধি
+          করে এবং কন্টেন্ট তৈরি করার প্রক্রিয়াকে সহজতর করে, যাতে সাংবাদিকরা
+          বাংলা ভাষাভাষী সম্প্রদায়ের জন্য সময়মতো এবং উচ্চ-মানের সংবাদ প্রদান
+          করতে পারেন।
         </motion.p>
       </div>
     </div>

@@ -14,10 +14,10 @@ const Navbar = () => {
 
       <div className="flex space-x-4">
         <Link
-          to="/team"
+          to="/our-team"
           className="text-gray-700 font-bold hover:text-gray-900"
         >
-          Our Team
+          OUR TEAM
         </Link>
       </div>
       <div className="flex space-x-4">
@@ -28,7 +28,7 @@ const Navbar = () => {
           Login
         </Link>
         <Link
-          to="/login"
+          to="/get-started"
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
         >
           Get Started
