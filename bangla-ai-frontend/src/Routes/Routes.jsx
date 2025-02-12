@@ -4,8 +4,8 @@ import LandingPage from "../Pages/LandingPage/LandingPage";
 import AboutPage from "../Pages/About_Contact_Page/AboutPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import ContactPage from "../Pages/About_Contact_Page/ContactPage";
-import GetStartedPage from "../Pages/GetStartedPage/GetStartedPage";
 import OurTeamPage from "../Pages/OurTeamPage/OurTeamPage";
+import TranslatePage from "../Pages/TranslatePage/TranslatePage";
 
 export const router = createBrowserRouter([
   {
@@ -29,8 +29,8 @@ export const router = createBrowserRouter([
         element: <ContactPage />,
       },
       {
-        path: "/get-started",
-        element: <GetStartedPage />,
+        path: "/translate",
+        element: <TranslatePage />,
       },
       {
         path: "/our-team",
