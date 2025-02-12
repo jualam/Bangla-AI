@@ -129,7 +129,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+APPEND_SLASH = False
 
 
-OPENAI_API_KEY = "your_openai_api_key"
+
+OPENAI_API_KEY = "API"
 

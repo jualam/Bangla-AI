@@ -1,31 +1,47 @@
+from django.http import StreamingHttpResponse
+from rest_framework.decorators import api_view
 import openai
 from django.conf import settings
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from .serializers import TranslationSerializer
 
 @api_view(['POST'])
 def translate_text(request):
-    serializer = TranslationSerializer(data=request.data)
-    
-    if serializer.is_valid():
-        input_text = serializer.validated_data['text']
-        
-        try:
-            # OpenAI API call for translation
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                api_key=settings.OPENAI_API_KEY,
-                messages=[
-                    {"role": "system", "content": "You are a helpful translator."},
-                    {"role": "user", "content": f"Translate the following text into Bangla:\n{input_text}"}
-                ]
-            )
-            
-            translated_text = response['choices'][0]['message']['content']
-            return Response({'translatedText': translated_text})
+    text = request.data.get('text', '')
 
-        except Exception as e:
-            return Response({'error': str(e)}, status=400)
-    
-    return Response(serializer.errors, status=400)
+    if not text:
+        return Response({
+            "message": "Invalid input",
+            "success": False,
+            "errors": "Text is required",
+            "code": 400
+        }, status=400)
+
+    try:
+        # Initialize OpenAI client
+        client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)
+
+        # Stream the translation response
+        response = client.chat.completions.create(
+            model="gpt-4-turbo",  # Use GPT-4 Turbo for faster performance
+            messages=[
+                {"role": "system", "content": "তুমি একজন বাংলা সংবাদ অনুবাদক। সংবাদ ভাষায় অনুবাদ করবে।"},
+                {"role": "user", "content": f"এই ইংরেজি সংবাদটি বাংলায় অনুবাদ কর:\n{text}"}
+            ],
+            max_tokens=2000,  # Limit the output for faster response
+            stream=True  # Enable streaming for faster delivery
+        )
+
+        # Stream the translated text to the frontend
+        def generate():
+            for chunk in response:
+                if chunk.choices[0].delta.content:
+                    yield chunk.choices[0].delta.content
+
+        return StreamingHttpResponse(generate(), content_type='text/plain')
+
+    except Exception as e:
+        return Response({
+            "message": "Translation Failed",
+            "success": False,
+            "error": str(e),
+            "code": 400
+        }, status=400)

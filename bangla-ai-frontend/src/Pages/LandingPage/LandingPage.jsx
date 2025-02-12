@@ -8,6 +8,7 @@ import Navbar from "../../Components/common/Navbar";
 const LandingPage = () => {
   // State to manage FAQ dropdowns
   const [openIndex, setOpenIndex] = useState(null);
+  const [text, setText] = useState("");
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -66,6 +67,8 @@ const LandingPage = () => {
           <textarea
             className="w-full h-48 p-4 focus:outline-none focus:ring-2 focus:ring-green-500 border rounded-lg text-gray-700 placeholder-gray-400 resize-none"
             placeholder="Paste your text here..."
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           ></textarea>
 
           {/* Buttons Section */}
@@ -78,7 +81,7 @@ const LandingPage = () => {
             </label>
 
             {/* Translate Button */}
-            <Link to="/get-started">
+            <Link to="/translate" state={{ inputText: text }}>
               <button className="w-full md:w-auto px-6 py-3 text-base font-medium bg-black hover:bg-gray-800 transition rounded-lg text-white hover:shadow-lg">
                 Translate →
               </button>
@@ -191,7 +194,6 @@ const LandingPage = () => {
           streamline content creation, enabling journalists to deliver timely,
           high-quality news to the Bengali-speaking community.
         </motion.p>
-        
       </div>
     </div>
   );
