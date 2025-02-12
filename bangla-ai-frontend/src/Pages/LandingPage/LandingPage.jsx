@@ -191,29 +191,7 @@ const LandingPage = () => {
           streamline content creation, enabling journalists to deliver timely,
           high-quality news to the Bengali-speaking community.
         </motion.p>
-
-        {/* Bengali Version */}
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="text-2xl md:text-3xl font-extrabold text-green-500 mt-10"
-        >
-          আমাদের সম্পর্কে
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="mt-6 text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed"
-        >
-          বাংলা এআই হল একটি উন্নত এআই-চালিত প্ল্যাটফর্ম যা নিউ ইয়র্ক সিটির
-          বাংলা জাতিগত মিডিয়া সাংবাদিকদের সহায়তা করার জন্য তৈরি হয়েছে। আমাদের
-          লক্ষ্য হলো অত্যাধুনিক সরঞ্জাম সরবরাহ করা যা অনুবাদের নির্ভুলতা বৃদ্ধি
-          করে এবং কন্টেন্ট তৈরি করার প্রক্রিয়াকে সহজতর করে, যাতে সাংবাদিকরা
-          বাংলা ভাষাভাষী সম্প্রদায়ের জন্য সময়মতো এবং উচ্চ-মানের সংবাদ প্রদান
-          করতে পারেন।
-        </motion.p>
+        
       </div>
     </div>
   );
