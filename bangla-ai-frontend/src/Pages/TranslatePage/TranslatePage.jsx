@@ -9,6 +9,8 @@ import {
 import { useLocation } from "react-router-dom";
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf";
 import workerSrc from "pdfjs-dist/build/pdf.worker?url";
+import { jsPDF } from "jspdf";
+import bengaliFont from "../TranslatePage/BanglaFont/NotoSansBengali.ttf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc; // Set worker source
 
@@ -72,8 +74,19 @@ const TranslatePage = () => {
     alert("Copied to clipboard!");
   };
 
-  const handleDownload = (type) => {
-    alert(`Downloading as ${type.toUpperCase()}...`);
+  const NotoSansBengaliBase64 = import.meta.env.VITE_BANGLA_FONT;
+
+  const handleDownloadPDF = () => {
+    if (!translatedText.trim()) {
+      alert("No translated text available!");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.addFont(bengaliFont, "NotoSansBengali", "normal");
+    doc.setFont("NotoSansBengali");
+    doc.text(translatedText, 10, 10, { maxWidth: 180 });
+    doc.save("translated_text.pdf");
   };
 
   const handleFileUpload = async (event) => {
@@ -148,7 +161,7 @@ const TranslatePage = () => {
         </label>
 
         <button
-          className="px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition flex items-center"
+          className="px-6 py-3 ml-18 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition flex items-center"
           onClick={handleTranslate}
         >
           <span>Translate →</span>
@@ -158,29 +171,11 @@ const TranslatePage = () => {
         <div className="relative">
           <button
             className="px-6 py-3 flex items-center space-x-2 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition"
-            onClick={() => setShowDownloadMenu(!showDownloadMenu)}
+            onClick={handleDownloadPDF}
           >
             <Download size={20} />
             <span>Download</span>
-            <ChevronDown size={18} />
           </button>
-
-          {showDownloadMenu && (
-            <div className="absolute top-12 left-0 w-45 bg-white shadow-lg rounded-lg py-2">
-              <button
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full text-left"
-                onClick={() => handleDownload("pdf")}
-              >
-                Download as PDF
-              </button>
-              <button
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full text-left"
-                onClick={() => handleDownload("word")}
-              >
-                Download as Word
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

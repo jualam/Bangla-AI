@@ -4,6 +4,8 @@ import { UploadCloud, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import Button from "../../Components/ui/Button";
 import Navbar from "../../Components/common/Navbar";
+import { SiGoogledocs } from "react-icons/si";
+import { RiRobot3Fill } from "react-icons/ri";
 
 const LandingPage = () => {
   // State to manage FAQ dropdowns
@@ -50,7 +52,7 @@ const LandingPage = () => {
             Welcome to <span className="text-green-500">Bangla-AI</span>
           </h1>
           <p className="mt-4 text-lg font-bold text-gray-600 max-w-lg mx-auto md:mx-0">
-            বাংলা এ আই, বাংলায় এ আই, আমাদের এ আই
+            বাংলা এ আই, আমাদের এ আই
           </p>
         </div>
 
@@ -99,10 +101,13 @@ const LandingPage = () => {
           {/* Step 1 */}
           <div
             className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg 
-                  transform hover:scale-105 hover:border-2 hover:border-blue-400 
-                  transition-all duration-500 ease-in-out"
+        transform hover:scale-105 hover:border-3 hover:border-green-400 
+        hover:backdrop-filter-none transition-all duration-500 ease-in-out"
           >
-            <div className="text-4xl text-blue-400 mb-4 animate-bounce">📄</div>
+            <div className="text-4xl text-white flex justify-center items-center mb-4 animate-bounce">
+              <SiGoogledocs />
+            </div>
+
             <h3 className="text-xl font-semibold text-white">Step 1</h3>
             <p className="mt-4 text-gray-200">
               Paste your text or upload a document.
@@ -112,10 +117,10 @@ const LandingPage = () => {
           {/* Step 2 */}
           <div
             className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg 
-                  transform hover:scale-105 hover:border-2 hover:border-green-400 
-                  transition-all duration-500 ease-in-out"
+            transform hover:scale-105 hover:border-3 hover:border-green-400 
+            hover:backdrop-filter-none transition-all duration-500 ease-in-out"
           >
-            <div className="text-4xl text-green-400 mb-4 animate-bounce">
+            <div className="text-4xl text-white flex justify-center items-center mb-4 animate-bounce">
               🤖
             </div>
             <h3 className="text-xl font-semibold text-white">Step 2</h3>
@@ -127,8 +132,8 @@ const LandingPage = () => {
           {/* Step 3 */}
           <div
             className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg 
-                  transform hover:scale-105 hover:border-2 hover:border-yellow-400 
-                  transition-all duration-500 ease-in-out"
+            transform hover:scale-105 hover:border-3 hover:border-green-400 
+            hover:backdrop-filter-none transition-all duration-500 ease-in-out"
           >
             <div className="text-4xl text-yellow-400 mb-4 animate-bounce">
               ✅
