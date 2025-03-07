@@ -7,7 +7,10 @@ import {
   Loader,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import Navbar from "../../Components/common/Navbar";
+import * as pdfjs from "pdfjs-dist/legacy/build/pdf";
+import workerSrc from "pdfjs-dist/build/pdf.worker?url";
+
+pdfjs.GlobalWorkerOptions.workerSrc = workerSrc; // Set worker source
 
 const TranslatePage = () => {
   const [text, setText] = useState("");
@@ -73,21 +76,39 @@ const TranslatePage = () => {
     alert(`Downloading as ${type.toUpperCase()}...`);
   };
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    if (file) {
+    if (!file) return;
+
+    if (file.type === "application/pdf") {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setText(e.target.result);
+      reader.onload = async (e) => {
+        const typedArray = new Uint8Array(e.target.result);
+        const pdf = await pdfjs.getDocument({ data: typedArray }).promise;
+        let extractedText = "";
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          const textItems = textContent.items.map((item) => item.str);
+          extractedText += textItems.join(" ") + "\n\n";
+        }
+
+        setText(extractedText); // Show extracted text in textarea
       };
+      reader.readAsArrayBuffer(file);
+    } else {
+      // Normal text file
+      const reader = new FileReader();
+      reader.onload = (e) => setText(e.target.result);
       reader.readAsText(file);
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-8 bg-white shadow-xl rounded-xl">
+    <div className="max-w-6xl mx-auto mb-8 p-8 bg-white shadow-xl rounded-xl">
       {/* <Navbar></Navbar> */}
-      <h2 className="text-2xl font-semibold text-center text-gray-900 mt-4 mb-6">
+      <h2 className="text-2xl font-semibold text-center text-gray-900  mb-6">
         Translate Your Texts with Bangla-AI
       </h2>
 

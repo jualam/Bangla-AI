@@ -91,26 +91,50 @@ const LandingPage = () => {
       </div>
 
       {/* How It Works Section */}
-      <div className="bg-white py-16 px-6 md:px-16 lg:px-32 text-center">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-8">
-          How It Works
+      <div className="bg-gradient-to-br from-green-500 to-black py-20 px-6 md:px-16 lg:px-32 text-center text-white">
+        <h2 className="text-3xl md:text-4xl font-bold mb-10">
+          🚀 How <span className="text-yellow-300">It Works</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-            <h3 className="text-xl font-semibold text-gray-900">Step 1</h3>
-            <p className="mt-4 text-gray-600">
+          {/* Step 1 */}
+          <div
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg 
+                  transform hover:scale-105 hover:border-2 hover:border-blue-400 
+                  transition-all duration-500 ease-in-out"
+          >
+            <div className="text-4xl text-blue-400 mb-4 animate-bounce">📄</div>
+            <h3 className="text-xl font-semibold text-white">Step 1</h3>
+            <p className="mt-4 text-gray-200">
               Paste your text or upload a document.
             </p>
           </div>
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-            <h3 className="text-xl font-semibold text-gray-900">Step 2</h3>
-            <p className="mt-4 text-gray-600">
+
+          {/* Step 2 */}
+          <div
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg 
+                  transform hover:scale-105 hover:border-2 hover:border-green-400 
+                  transition-all duration-500 ease-in-out"
+          >
+            <div className="text-4xl text-green-400 mb-4 animate-bounce">
+              🤖
+            </div>
+            <h3 className="text-xl font-semibold text-white">Step 2</h3>
+            <p className="mt-4 text-gray-200">
               Let Bangla-AI process and translate your content.
             </p>
           </div>
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-            <h3 className="text-xl font-semibold text-gray-900">Step 3</h3>
-            <p className="mt-4 text-gray-600">
+
+          {/* Step 3 */}
+          <div
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg 
+                  transform hover:scale-105 hover:border-2 hover:border-yellow-400 
+                  transition-all duration-500 ease-in-out"
+          >
+            <div className="text-4xl text-yellow-400 mb-4 animate-bounce">
+              ✅
+            </div>
+            <h3 className="text-xl font-semibold text-white">Step 3</h3>
+            <p className="mt-4 text-gray-200">
               Download or copy the translated text instantly.
             </p>
           </div>
@@ -148,20 +172,20 @@ const LandingPage = () => {
       </div>
 
       {/* Newsletter Signup */}
-      <div className="bg-gradient-to-br from-green-500 to-blue-500 py-16 px-6 md:px-16 lg:px-32 text-center text-white">
-        <h2 className="text-2xl md:text-3xl font-extrabold mb-4">
-          Stay Updated with Bangla-AI
+      <div className="bg-gradient-to-br from-green-500 to-black py-16 px-6 md:px-16 lg:px-32 text-center text-white">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Stay Updated with <span className="text-green-400">Bangla-AI</span>
         </h2>
-        <p className="text-lg mb-8">
+        <p className="text-lg mb-8 opacity-90">
           Subscribe to our newsletter for the latest updates and features.
         </p>
-        <div className="max-w-md mx-auto flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3">
+        <div className="max-w-lg mx-auto flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
           <input
             type="email"
             placeholder="Enter your email"
-            className="w-full p-3 rounded-lg focus:outline-none text-gray-900"
+            className="w-full md:flex-1 p-3 rounded-lg bg-white/90 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-900 placeholder-gray-500 transition"
           />
-          <button className="w-full md:w-auto px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition">
+          <button className="w-full md:w-auto px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 hover:scale-105 transition-all duration-300">
             Subscribe
           </button>
         </div>
@@ -178,7 +202,7 @@ const LandingPage = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-2xl md:text-3xl font-extrabold text-green-500"
+          className="text-2xl md:text-3xl font-extrabold text-black"
         >
           About Bangla-AI
         </motion.h2>

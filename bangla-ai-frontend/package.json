@@ -16,6 +16,7 @@
     "daisyui": "^4.12.23",
     "framer-motion": "^12.4.0",
     "lucide-react": "^0.474.0",
+    "pdfjs-dist": "^4.10.38",
     "postcss": "^8.5.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
