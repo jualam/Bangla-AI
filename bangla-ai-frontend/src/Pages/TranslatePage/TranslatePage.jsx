@@ -74,7 +74,7 @@ const TranslatePage = () => {
     alert("Copied to clipboard!");
   };
 
-  const NotoSansBengaliBase64 = import.meta.env.VITE_BANGLA_FONT;
+  // const NotoSansBengaliBase64 = import.meta.env.VITE_BANGLA_FONT;
 
   const handleDownloadPDF = () => {
     if (!translatedText.trim()) {
