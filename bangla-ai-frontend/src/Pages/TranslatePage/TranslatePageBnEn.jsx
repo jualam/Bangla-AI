@@ -14,13 +14,15 @@ import bengaliFont from "../TranslatePage/BanglaFont/NotoSansBengali.ttf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc; // Set worker source
 
-const TranslatePage = () => {
+const TranslatePageBnEn = () => {
   const [text, setText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [showDownloadMenu, setShowDownloadMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const inputText = location.state?.inputText || "";
+
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (inputText) {
@@ -35,7 +37,7 @@ const TranslatePage = () => {
     setTranslatedText(""); // Clear previous translation
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/translate", {
+      const response = await fetch(`${apiUrl}/api/translate-bn-en`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,17 +106,23 @@ const TranslatePage = () => {
           const page = await pdf.getPage(i);
           const textContent = await page.getTextContent();
           const textItems = textContent.items.map((item) => item.str);
+
           extractedText += textItems.join(" ") + "\n\n";
         }
 
-        setText(extractedText); // Show extracted text in textarea
+        // Decode to properly handle Bangla characters
+        const decoder = new TextDecoder("utf-8");
+        setText(decoder.decode(new TextEncoder().encode(extractedText)));
       };
       reader.readAsArrayBuffer(file);
     } else {
       // Normal text file
       const reader = new FileReader();
-      reader.onload = (e) => setText(e.target.result);
-      reader.readAsText(file);
+      reader.onload = (e) => {
+        const decoder = new TextDecoder("utf-8");
+        setText(decoder.decode(new TextEncoder().encode(e.target.result)));
+      };
+      reader.readAsText(file, "utf-8");
     }
   };
 
@@ -127,7 +135,7 @@ const TranslatePage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
-          <h3 className="text-lg font-medium text-gray-800 mb-3">English</h3>
+          <h3 className="text-lg font-medium text-gray-800 mb-3">Bangali</h3>
           <textarea
             className="w-full h-80 p-4 border rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700 placeholder-gray-400 resize-none"
             placeholder="Enter your text here..."
@@ -137,7 +145,7 @@ const TranslatePage = () => {
         </div>
 
         <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 relative">
-          <h3 className="text-lg font-medium text-gray-800 mb-3">Bengali</h3>
+          <h3 className="text-lg font-medium text-gray-800 mb-3">English</h3>
           <textarea
             className="w-full h-80 p-4 border rounded-lg bg-gray-100 text-gray-700 resize-none"
             placeholder="Translation will appear here..."
@@ -182,4 +190,4 @@ const TranslatePage = () => {
   );
 };
 
-export default TranslatePage;
+export default TranslatePageBnEn;

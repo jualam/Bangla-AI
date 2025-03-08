@@ -7,7 +7,7 @@ import Navbar from "../../Components/common/Navbar";
 const teamMembers = [
   {
     name: "MD Ashraful Goni",
-    role: "Lead Developer",
+    role: "Team Lead",
     image: goni,
   },
   {

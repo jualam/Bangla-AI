@@ -5,7 +5,8 @@ import AboutPage from "../Pages/About_Contact_Page/AboutPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import ContactPage from "../Pages/About_Contact_Page/ContactPage";
 import OurTeamPage from "../Pages/OurTeamPage/OurTeamPage";
-import TranslatePage from "../Pages/TranslatePage/TranslatePage";
+import TranslatePageEnBn from "../Pages/TranslatePage/TranslatePageEnBn";
+import TranslatePageBnEn from "../Pages/TranslatePage/TranslatePageBnEn";
 
 export const router = createBrowserRouter([
   {
@@ -29,8 +30,12 @@ export const router = createBrowserRouter([
         element: <ContactPage />,
       },
       {
-        path: "/translate",
-        element: <TranslatePage />,
+        path: "/translate-en-bn",
+        element: <TranslatePageEnBn />,
+      },
+      {
+        path: "/translate-bn-en",
+        element: <TranslatePageBnEn />,
       },
       {
         path: "/our-team",

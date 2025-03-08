@@ -56,39 +56,25 @@ const LandingPage = () => {
           </p>
         </div>
 
-        {/* Right Section - Input Box */}
-        <div className="md:w-1/2 w-full bg-white shadow-xl rounded-xl p-8 flex flex-col items-center space-y-6 border border-gray-100">
+        {/* Right Section - Translation Options */}
+        <div className="md:w-1/2 w-full mb-4 bg-white shadow-2xl rounded-xl p-8 flex flex-col items-center space-y-8 border border-gray-300">
           <h2 className="text-xl font-semibold text-gray-900">
-            Translate your Texts with Bangla-AI
+            Choose a Translation Mode
           </h2>
 
-          {/* Divider */}
-          <hr className="w-full border-t border-gray-200" />
+          {/* English to Bangla Translation */}
+          <Link to="/translate-en-bn">
+            <button className="w-full px-6 py-3 text-base font-medium bg-gradient-to-r from-green-500 to-teal-500 hover:from-teal-600 hover:to-green-600 transition duration-300 ease-in-out transform hover:scale-105 rounded-lg text-white shadow-lg hover:shadow-xl">
+              Translate from English to Bangla →
+            </button>
+          </Link>
 
-          {/* Enlarged Textarea */}
-          <textarea
-            className="w-full h-48 p-4 focus:outline-none focus:ring-2 focus:ring-green-500 border rounded-lg text-gray-700 placeholder-gray-400 resize-none"
-            placeholder="Paste your text here..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          ></textarea>
-
-          {/* Buttons Section */}
-          <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 w-full justify-between">
-            {/* Upload Button with Icon */}
-            <label className="cursor-pointer flex items-center space-x-2 w-full md:w-auto text-gray-700 font-medium hover:text-gray-900 transition-colors">
-              <input type="file" className="hidden" />
-              <UploadCloud size={18} /> {/* Upload Icon */}
-              <span>Upload</span>
-            </label>
-
-            {/* Translate Button */}
-            <Link to="/translate" state={{ inputText: text }}>
-              <button className="w-full md:w-auto px-6 py-3 text-base font-medium bg-black hover:bg-gray-800 transition rounded-lg text-white hover:shadow-lg">
-                Translate →
-              </button>
-            </Link>
-          </div>
+          {/* Bangla to English Translation */}
+          <Link to="/translate-bn-en">
+            <button className="w-full px-6 py-3 mb-4 text-base font-medium bg-gradient-to-r from-green-500 to-teal-500 hover:from-teal-600 hover:to-green-600 transition duration-300 ease-in-out transform hover:scale-105 rounded-lg text-white shadow-lg hover:shadow-xl">
+              Translate from Bangla to English →
+            </button>
+          </Link>
         </div>
       </div>
 
