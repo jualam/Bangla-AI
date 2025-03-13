@@ -128,12 +128,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 APPEND_SLASH = False
 
+CORS_ALLOWED_ORIGINS = [
+    "https://www.bangla-ai.com/",
+]
+
+ALLOWED_HOSTS = ['your-backend-domain.up.railway.app', 'localhost']
 
 
-# OPENAI_API_KEY = "API_KEY"
+
+OPENAI_API_KEY = "Open_AI_API"
 
 
 

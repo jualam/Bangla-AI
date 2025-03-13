@@ -26,7 +26,7 @@ def translate_text_en_bn(request):
                 {"role": "system", "content": "তুমি একজন বাংলা সংবাদ অনুবাদক। সংবাদ ভাষায় অনুবাদ করবে।"},
                 {"role": "user", "content": f"এই ইংরেজি সংবাদটি বাংলায় অনুবাদ কর:\n{text}"}
             ],
-            max_tokens=2000,  # Limit the output for faster response
+            max_tokens=4096,  # Limit the output for faster response
             stream=True  # Enable streaming for faster delivery
         )
 
