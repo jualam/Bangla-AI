@@ -81,7 +81,7 @@ const LandingPage = () => {
       {/* How It Works Section */}
       <div className="bg-gradient-to-br from-green-500 to-black py-20 px-6 md:px-16 lg:px-32 text-center text-white">
         <h2 className="text-3xl md:text-4xl font-bold mb-10">
-          🚀 How <span className="text-red">It Works</span>
+          🚀 How <span className="text-red-500">It Works</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Step 1 */}
