@@ -136,7 +136,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://www.bangla-ai.com",
 ]
 
-ALLOWED_HOSTS = ['backend.bangla-ai.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 
