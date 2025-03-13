@@ -1,6 +1,6 @@
 import React from "react";
 import goni from "../../assets/goni.jpg";
-import jisan from "../../assets/jisan.jpg";
+import jisan from "../../assets/Jisan.jpg";
 import faiyaz from "../../assets/faiyaz.jpg";
 import Navbar from "../../Components/common/Navbar";
 
