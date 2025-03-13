@@ -149,7 +149,7 @@ ALLOWED_HOSTS = ['*']
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # Debug mode
-DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
 # Allowed hosts
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
