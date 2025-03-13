@@ -136,7 +136,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://www.bangla-ai.com",
 ]
 
-ALLOWED_HOSTS = ['your-backend-domain.up.railway.app', 'localhost']
+ALLOWED_HOSTS = ['backend.bangla-ai.com', 'localhost']
 
 
 
