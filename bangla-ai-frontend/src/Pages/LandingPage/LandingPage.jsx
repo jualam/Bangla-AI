@@ -81,7 +81,7 @@ const LandingPage = () => {
       {/* How It Works Section */}
       <div className="bg-gradient-to-br from-green-500 to-black py-20 px-6 md:px-16 lg:px-32 text-center text-white">
         <h2 className="text-3xl md:text-4xl font-bold mb-10">
-          🚀 How <span className="text-yellow-300">It Works</span>
+          🚀 How <span className="text-red">It Works</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Step 1 */}
@@ -176,7 +176,7 @@ const LandingPage = () => {
             placeholder="Enter your email"
             className="w-full md:flex-1 p-3 rounded-lg bg-white/90 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-900 placeholder-gray-500 transition"
           />
-          <button className="w-full md:w-auto px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 hover:scale-105 transition-all duration-300">
+          <button className="w-full md:w-auto px-6 py-3 bg-red-500 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 hover:scale-105 transition-all duration-300">
             Subscribe
           </button>
         </div>
