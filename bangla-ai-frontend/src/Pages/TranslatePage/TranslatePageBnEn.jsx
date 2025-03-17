@@ -1,23 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  UploadCloud,
-  ClipboardCopy,
-  Download,
-  ChevronDown,
-  Loader,
-} from "lucide-react";
+import { ClipboardCopy, Loader } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import * as pdfjs from "pdfjs-dist/legacy/build/pdf";
-import workerSrc from "pdfjs-dist/build/pdf.worker?url";
-import { jsPDF } from "jspdf";
-import bengaliFont from "../TranslatePage/BanglaFont/NotoSansBengali.ttf";
-
-pdfjs.GlobalWorkerOptions.workerSrc = workerSrc; // Set worker source
 
 const TranslatePageBnEn = () => {
   const [text, setText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
-  const [showDownloadMenu, setShowDownloadMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const inputText = location.state?.inputText || "";
@@ -76,66 +63,17 @@ const TranslatePageBnEn = () => {
     alert("Copied to clipboard!");
   };
 
-  // const NotoSansBengaliBase64 = import.meta.env.VITE_BANGLA_FONT;
-
-  const handleDownloadPDF = () => {
-    if (!translatedText.trim()) {
-      alert("No translated text available!");
-      return;
-    }
-
-    const doc = new jsPDF();
-    doc.addFont(bengaliFont, "NotoSansBengali", "normal");
-    doc.setFont("NotoSansBengali");
-    doc.text(translatedText, 10, 10, { maxWidth: 180 });
-    doc.save("translated_text.pdf");
-  };
-
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    if (file.type === "application/pdf") {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        const typedArray = new Uint8Array(e.target.result);
-        const pdf = await pdfjs.getDocument({ data: typedArray }).promise;
-        let extractedText = "";
-
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const textContent = await page.getTextContent();
-          const textItems = textContent.items.map((item) => item.str);
-
-          extractedText += textItems.join(" ") + "\n\n";
-        }
-
-        // Decode to properly handle Bangla characters
-        const decoder = new TextDecoder("utf-8");
-        setText(decoder.decode(new TextEncoder().encode(extractedText)));
-      };
-      reader.readAsArrayBuffer(file);
-    } else {
-      // Normal text file
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const decoder = new TextDecoder("utf-8");
-        setText(decoder.decode(new TextEncoder().encode(e.target.result)));
-      };
-      reader.readAsText(file, "utf-8");
-    }
-  };
-
   return (
     <div className="max-w-6xl mx-auto mb-8 p-8 bg-white shadow-xl rounded-xl">
-      {/* <Navbar></Navbar> */}
-      <h2 className="text-2xl font-semibold text-center text-gray-900  mb-6">
+      <h2 className="text-2xl font-semibold text-center text-gray-900 mb-6">
         Translate Your Texts with Bangla-AI
       </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  
+      {/* Layout for Translation Boxes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+        {/* First Translation Box */}
         <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
-          <h3 className="text-lg font-medium text-gray-800 mb-3">Bangali</h3>
+          <h3 className="text-lg font-medium text-gray-800 mb-3">Bangla</h3>
           <textarea
             className="w-full h-80 p-4 border rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700 placeholder-gray-400 resize-none"
             placeholder="Enter your text here..."
@@ -143,7 +81,19 @@ const TranslatePageBnEn = () => {
             onChange={(e) => setText(e.target.value)}
           />
         </div>
-
+  
+        {/* Translate Button (VISIBLE ONLY ON MOBILE - BETWEEN BOXES) */}
+        <div className="flex justify-center md:hidden">
+          <button
+            className="px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition flex items-center"
+            onClick={handleTranslate}
+          >
+            <span>Translate →</span>
+            {isLoading && <Loader className="w-5 h-5 ml-2 animate-spin" />}
+          </button>
+        </div>
+  
+        {/* Second Translation Box */}
         <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 relative">
           <h3 className="text-lg font-medium text-gray-800 mb-3">English</h3>
           <textarea
@@ -160,34 +110,20 @@ const TranslatePageBnEn = () => {
           </button>
         </div>
       </div>
-
-      <div className="flex flex-col md:flex-row justify-between items-center mt-6 space-y-3 md:space-y-0">
-        <label className="cursor-pointer flex items-center space-x-2 text-gray-700 font-medium hover:text-gray-900 transition">
-          <input type="file" className="hidden" onChange={handleFileUpload} />
-          <UploadCloud size={20} />
-          <span>Upload</span>
-        </label>
-
+  
+      {/* Translate Button (VISIBLE ONLY ON DESKTOP - BELOW BOXES) */}
+      <div className="hidden md:flex justify-center mt-6">
         <button
-          className="px-6 py-3 ml-18 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition flex items-center"
+          className="px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition flex items-center"
           onClick={handleTranslate}
         >
           <span>Translate →</span>
           {isLoading && <Loader className="w-5 h-5 ml-2 animate-spin" />}
         </button>
-
-        <div className="relative">
-          <button
-            className="px-6 py-3 flex items-center space-x-2 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition"
-            onClick={handleDownloadPDF}
-          >
-            <Download size={20} />
-            <span>Download</span>
-          </button>
-        </div>
       </div>
     </div>
   );
 };
 
 export default TranslatePageBnEn;
+
