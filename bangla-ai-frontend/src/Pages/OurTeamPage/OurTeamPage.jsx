@@ -9,16 +9,19 @@ const teamMembers = [
     name: "MD Ashraful Goni",
     role: "Team Lead",
     image: goni,
+    facebookUrl: "https://www.facebook.com/ashrafull.goni", // Replace with Goni's Facebook URL
   },
   {
     name: "Mizanur Rahman Jisan",
     role: "Developer",
     image: jisan,
+    facebookUrl: "https://www.facebook.com/mrjisan189", // Replace with Jisan's Facebook URL
   },
   {
     name: "Juhair Faiaz",
     role: "Developer",
     image: faiyaz,
+    facebookUrl: "https://www.facebook.com/juhair.faiaz", // Replace with Faiaz's Facebook URL
   },
 ];
 
@@ -58,9 +61,14 @@ const OurTeamPage = () => {
                 </h3>
                 <p className="text-gray-600">{member.role}</p>
                 <div className="mt-4">
-                  <button className="px-4 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition">
+                  <a
+                    href={member.facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition"
+                  >
                     View Profile
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
