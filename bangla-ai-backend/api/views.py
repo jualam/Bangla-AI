@@ -5,23 +5,51 @@ import openai
 from django.conf import settings
 import re
 
-# function for chunking
+# # function for chunking
+# def split_text_into_chunks(text, max_tokens=1500):
+#     sentences = re.split(r'(?<=[।.!?]) +', text)  
+#     chunks = []
+#     current_chunk = ""
+
+#     for sentence in sentences:
+#         if len(current_chunk) + len(sentence) <= max_tokens:
+#             current_chunk += sentence + " "
+#         else:
+#             chunks.append(current_chunk.strip())
+#             current_chunk = sentence + " "
+
+#     if current_chunk:
+#         chunks.append(current_chunk.strip())
+
+#     return chunks
+
+
+
 def split_text_into_chunks(text, max_tokens=1500):
-    sentences = re.split(r'(?<=[।.!?]) +', text)  
+    # Split by sentences
+    sentences = re.split(r'(?<=[।.!?]) +', text)
     chunks = []
-    current_chunk = ""
+    current_chunk = []
+    current_tokens = 0
 
     for sentence in sentences:
-        if len(current_chunk) + len(sentence) <= max_tokens:
-            current_chunk += sentence + " "
+        # Estimate the number of tokens in the sentence
+        num_tokens = len(sentence.split())  # Rough estimate based on word count
+        if current_tokens + num_tokens <= max_tokens:
+            current_chunk.append(sentence)
+            current_tokens += num_tokens
         else:
-            chunks.append(current_chunk.strip())
-            current_chunk = sentence + " "
+            chunks.append(" ".join(current_chunk))
+            current_chunk = [sentence]
+            current_tokens = num_tokens
 
     if current_chunk:
-        chunks.append(current_chunk.strip())
+        chunks.append(" ".join(current_chunk))
 
     return chunks
+
+
+
 
 @api_view(['POST'])
 def translate_text_en_bn(request):
