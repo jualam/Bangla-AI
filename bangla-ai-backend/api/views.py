@@ -7,23 +7,23 @@ import re
 
 # Original Code
 
-# # function for chunking
-# def split_text_into_chunks(text, max_tokens=1500):
-#     sentences = re.split(r'(?<=[।.!?]) +', text)  
-#     chunks = []
-#     current_chunk = ""
+# function for chunking
+def split_text_into_chunks(text, max_tokens=2500):
+    sentences = re.split(r'(?<=[।.!?]) +', text)  
+    chunks = []
+    current_chunk = ""
 
-#     for sentence in sentences:
-#         if len(current_chunk) + len(sentence) <= max_tokens:
-#             current_chunk += sentence + " "
-#         else:
-#             chunks.append(current_chunk.strip())
-#             current_chunk = sentence + " "
+    for sentence in sentences:
+        if len(current_chunk) + len(sentence) <= max_tokens:
+            current_chunk += sentence + " "
+        else:
+            chunks.append(current_chunk.strip())
+            current_chunk = sentence + " "
 
-#     if current_chunk:
-#         chunks.append(current_chunk.strip())
+    if current_chunk:
+        chunks.append(current_chunk.strip())
 
-#     return chunks
+    return chunks
 
 # New Code for testing
 
@@ -51,36 +51,39 @@ import re
 #     return chunks
 
 
-import tiktoken  # For token count estimation
+# using tiktoken
 
-tokenizer = tiktoken.get_encoding("gpt2")
 
-def get_token_count(text):
-    """Returns the number of tokens for the input text."""
-    return len(tokenizer.encode(text))
+# import tiktoken  # For token count estimation
 
-def split_text_into_chunks(text, max_tokens=2500):
-    sentences = re.split(r'(?<=[।.!?]) +', text)
-    chunks = []
-    current_chunk = []
-    current_tokens = 0
+# tokenizer = tiktoken.get_encoding("gpt2")
 
-    for sentence in sentences:
-        # Estimate the number of tokens in the sentence
-        sentence_tokens = get_token_count(sentence)
-        if current_tokens + sentence_tokens <= max_tokens:
-            current_chunk.append(sentence)
-            current_tokens += sentence_tokens
-        else:
-            # If adding the sentence exceeds the limit, store the current chunk and start a new one
-            chunks.append(" ".join(current_chunk))
-            current_chunk = [sentence]
-            current_tokens = sentence_tokens
+# def get_token_count(text):
+#     """Returns the number of tokens for the input text."""
+#     return len(tokenizer.encode(text))
 
-    if current_chunk:
-        chunks.append(" ".join(current_chunk))
+# def split_text_into_chunks(text, max_tokens=2500):
+#     sentences = re.split(r'(?<=[।.!?]) +', text)
+#     chunks = []
+#     current_chunk = []
+#     current_tokens = 0
 
-    return chunks
+#     for sentence in sentences:
+#         # Estimate the number of tokens in the sentence
+#         sentence_tokens = get_token_count(sentence)
+#         if current_tokens + sentence_tokens <= max_tokens:
+#             current_chunk.append(sentence)
+#             current_tokens += sentence_tokens
+#         else:
+#             # If adding the sentence exceeds the limit, store the current chunk and start a new one
+#             chunks.append(" ".join(current_chunk))
+#             current_chunk = [sentence]
+#             current_tokens = sentence_tokens
+
+#     if current_chunk:
+#         chunks.append(" ".join(current_chunk))
+
+#     return chunks
 
 
 
