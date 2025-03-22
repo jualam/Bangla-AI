@@ -5,8 +5,8 @@ import openai
 from django.conf import settings
 import re
 
-# function for chunking
-def split_text_into_chunks(text, max_tokens=2000):
+# Function for chunking text
+def split_text_into_chunks(text, max_tokens=500):  # Reduced max_tokens for better handling
     sentences = re.split(r'(?<=[।.!?]) +', text)  
     chunks = []
     current_chunk = ""
@@ -39,24 +39,32 @@ def translate_text_en_bn(request):
         # Initialize OpenAI client
         client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)
 
-        # Stream the translation response
-        response = client.chat.completions.create(
-            model="gpt-4-turbo",  # Use GPT-4 Turbo for faster performance
-            messages=[
-                {"role": "system", "content": "তুমি একজন বাংলা সংবাদ অনুবাদক। সংবাদ ভাষায় অনুবাদ করবে।"},
-                {"role": "user", "content": f"এই ইংরেজি সংবাদটি বাংলায় অনুবাদ কর:\n{text}"}
-            ],
-            max_tokens=2000,  # Limit the output for faster response
-            stream=True  # Enable streaming for faster delivery
-        )
+        # Split text into chunks
+        chunks = split_text_into_chunks(text)
 
-        # Stream the translated text to the frontend
-        def generate():
-            for chunk in response:
-                if chunk.choices[0].delta.content:
-                    yield chunk.choices[0].delta.content
+        translated_chunks = []
+        for chunk in chunks:
+            response = client.chat.completions.create(
+                model="gpt-4-turbo",
+                messages=[
+                    {"role": "system", "content": "তুমি একজন বাংলা সংবাদ অনুবাদক। সংবাদ ভাষায় অনুবাদ করবে।"},
+                    {"role": "user", "content": f"এই ইংরেজি সংবাদটি বাংলায় অনুবাদ কর:\n{chunk}"}
+                ],
+                max_tokens=1000  # Ensure response fits within limit
+            )
 
-        return StreamingHttpResponse(generate(), content_type='text/plain')
+            translated_text = response.choices[0].message.content.strip()
+            translated_chunks.append(translated_text)
+
+        # Join all chunks to form the full translated text
+        full_translation = " ".join(translated_chunks)
+
+        return Response({
+            "message": "Translation Successful",
+            "success": True,
+            "translated_text": full_translation,
+            "code": 200
+        }, status=200)
 
     except Exception as e:
         return Response({
@@ -65,7 +73,7 @@ def translate_text_en_bn(request):
             "error": str(e),
             "code": 400
         }, status=400)
-        
+    
     
 @api_view(['POST'])
 def translate_text_bn_en(request):
